@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    public testScriptable testScriptable_;
-    public testScriptable testScriptable_2;
+    //public testScriptable testScriptable_;
+    //public testScriptable testScriptable_2;
     public Enemy currentEnemyReference;
     public float damage;
     public float vida;
@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q)) 
+        /*if (Input.GetKeyDown(KeyCode.Q)) 
         {
             if (currentEnemyReference.vulnerable) 
             {
@@ -48,6 +48,6 @@ public class Player : MonoBehaviour
             testScriptable_.muertes = SceneManager.GetActiveScene().buildIndex - 1;
             testScriptable_.vida += SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-        }
+        }*/
     }
 }
