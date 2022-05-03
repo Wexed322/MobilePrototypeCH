@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerSettings = GameManager.instance.playerConfig;
+
         if (playerSettings != null) 
         {
             vida = playerSettings.vida;
