@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 {
     //public testScriptable testScriptable_;
     //public testScriptable testScriptable_2;
+    Animator animator;
     public Enemy currentEnemyReference;
     public float damage;
     public float vida;
@@ -15,9 +16,41 @@ public class Player : MonoBehaviour
     public float currentDiamonds;
     //ARMA
     //STATS DE VELOCIDAD DE ATAQUE??, MAS VIDA, POWER UP
-    void Start()
+    private void Awake()
     {
         
+    }
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    void ReceiveDamage(float damage)
+    {
+        animator.SetTrigger("Flinch");
+        vida -= damage;
+    }
+    public void TryAttack()
+    {
+        if(this.tag == "Block")
+        {
+            ReceiveDamage(currentEnemyReference.damage/2);
+        }
+        else if(this.tag == "Parry")
+        {
+            currentEnemyReference.Flinch();
+            Counter();
+        }
+        else
+        {
+            ReceiveDamage(currentEnemyReference.damage);
+        }
+
+    }
+
+    void Counter()
+    {
+        animator.SetTrigger("Attack");
     }
 
     void Update()

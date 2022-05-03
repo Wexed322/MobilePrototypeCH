@@ -6,17 +6,22 @@ public enum EnemyType {Fuerza, Magia, Agilidad}
 public class Enemy : MonoBehaviour
 {
     Player referencePlayer;
+    Animator animator;
     public bool vulnerable;
     public float damage;
-    public float vida;
+    public float health;
     public EnemyType myType;
     //BOMBAS DE HUMO, BLUR
     //PODER DE REGRESAR EL TIEMPO
     //HACER ABUELO AL RIVAL Y REDUCIR SUS STATS
 
-
+    private void Awake()
+    {
+        
+    }
     void Start()
     {
+        animator = GetComponent<Animator>();
         referencePlayer = FindObjectOfType<Player>();
         referencePlayer.currentEnemyReference = this;
 
@@ -30,8 +35,25 @@ public class Enemy : MonoBehaviour
         }
         
     }
-
-    public void setVurnerability() 
+    public void Attack()
+    {
+        animator.SetTrigger("Attack");
+        referencePlayer.TryAttack();
+    }
+    public void Flinch()
+    {
+        animator.SetTrigger("Countered");
+        ReceiveDamage();
+    }
+    void ReceiveDamage()
+    {
+        health = health - referencePlayer.damage;
+    }
+    public void Death()
+    {
+        animator.SetBool("IsDead", true);
+    }
+    public void setVulnerability() 
     {
         vulnerable = !vulnerable;
     }
