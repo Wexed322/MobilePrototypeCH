@@ -6,7 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "playerConfig", menuName = "PlayerConfig")]
 public class PlayerConfig : ScriptableObject
 {
-    public int id;
+    public string nombre;
+    public string descripcion;
     public float vida;
     public float damage;
     public float resistencia;

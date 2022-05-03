@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcf33d68dea88f847882ec4ee0dab280, type: 3}
   m_Name: Espadaamarillo
   m_EditorClassIdentifier: 
-  id: 0
-  vida: 0
-  damage: 0
-  resistencia: 0
+  nombre: Pepe
+  descripcion: Le gusta la naturalez y fumarse un porrito
+  vida: 10
+  damage: 10
+  resistencia: 10
