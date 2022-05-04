@@ -5,8 +5,10 @@ using UnityEngine;
 public enum EnemyType {Fuerza, Magia, Agilidad}
 public class Enemy : MonoBehaviour
 {
-    Player referencePlayer;
+    public Player referencePlayer;
+    public float secondsBetweenAttacks;
     Animator animator;
+    SpriteRenderer sr;
     public bool vulnerable;
     public float damage;
     public float health;
@@ -22,17 +24,19 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
         referencePlayer = FindObjectOfType<Player>();
         referencePlayer.currentEnemyReference = this;
-
-        this.GetComponent<Animator>().speed = 0.5f;
+        StartCoroutine("AttackTask");
+        //this.GetComponent<Animator>().speed = 0.5f;
     }
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.A)) 
         {
             this.GetComponent<Animator>().speed++;
-        }
+        }*/
         
     }
     public void Attack()
@@ -42,12 +46,14 @@ public class Enemy : MonoBehaviour
     }
     public void Flinch()
     {
-        animator.SetTrigger("Countered");
+        animator.SetTrigger("Flinch");
         ReceiveDamage();
     }
     void ReceiveDamage()
     {
         health = health - referencePlayer.damage;
+        if (health <= 0)
+            Death();
     }
     public void Death()
     {
@@ -56,5 +62,47 @@ public class Enemy : MonoBehaviour
     public void setVulnerability() 
     {
         vulnerable = !vulnerable;
+    }
+    public void ChangeColor(int color)
+    {
+        switch (color)
+        {
+            case 1:
+                sr.color = Color.red;
+                break;
+            case 2:
+                sr.color = Color.blue;
+                break;
+            case 3:
+                sr.color = Color.green;
+                break;
+            case 4:
+                sr.color = Color.black;
+                break;
+            case 5:
+                sr.color = Color.yellow;
+                break;
+            default:
+                sr.color = Color.white;
+                break;
+        }
+    }
+    IEnumerator AttackTask()
+    {
+        float current = secondsBetweenAttacks;
+        while (true)
+        {
+            if (current <= 0f)
+            {
+                Attack();
+                current = secondsBetweenAttacks;
+            }
+            else
+            {
+                current -= Time.deltaTime;
+            }
+            yield return null;
+        }
+
     }
 }

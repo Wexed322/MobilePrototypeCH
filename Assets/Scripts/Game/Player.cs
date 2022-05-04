@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     //public testScriptable testScriptable_;
     //public testScriptable testScriptable_2;
     Animator animator;
+    SpriteRenderer sr;
     public Enemy currentEnemyReference;
     public float damage;
     public float vida;
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     void ReceiveDamage(float damage)
@@ -48,6 +50,34 @@ public class Player : MonoBehaviour
 
     }
 
+    public void SetTag(string tag)
+    {
+        this.tag = tag;
+    }
+    public void ChangeColor(int color)
+    {
+        switch(color){
+            case 1:
+                sr.color = Color.red;
+                break;
+            case 2:
+                sr.color = Color.blue;
+                break;
+            case 3:
+                sr.color = Color.green;
+                break;
+            case 4:
+                sr.color = Color.black;
+                break;
+            case 5:
+                sr.color = Color.yellow;
+                break;
+            default:
+                sr.color = Color.white;
+                break;
+        }
+    }
+
     void Counter()
     {
         animator.SetTrigger("Attack");
@@ -55,6 +85,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+            animator.SetTrigger("Block");
         /*if (Input.GetKeyDown(KeyCode.Q)) 
         {
             if (currentEnemyReference.vulnerable) 
