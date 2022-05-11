@@ -9,19 +9,30 @@ public class Player : MonoBehaviour
 {
     //public testScriptable testScriptable_;
     //public testScriptable testScriptable_2;
-    [SerializeField] Text Score;
+    //public HealthBar healthBar;
+    public GameObject GameOverPanel;
+    public GameObject PausePanel;
+    [SerializeField] Text ScoreText;
+    [SerializeField] Text TimeText;
+    [SerializeField] Text VidasText;
     Animator animator;
     SpriteRenderer sr;
     public Enemy currentEnemyReference;
+    public int vidas;
     public float damage;
     public float vida;
     public float currentCoins;
     public float currentDiamonds;
     public int score;
+    bool isPaused;
 
     void SetScore()
     {
-        Score.text = string.Format("Score: {0}",this.score);
+        ScoreText.text = string.Format("Score: {0}",this.score);
+    }
+    void SetVidas()
+    {
+        VidasText.text = string.Format("Vidas: {0}", this.vidas);
     }
     //ARMA
     //STATS DE VELOCIDAD DE ATAQUE??, MAS VIDA, POWER UP
@@ -31,16 +42,40 @@ public class Player : MonoBehaviour
     }
     void Start()
     {
+        isPaused = false;
+        GameOverPanel.SetActive(false);
         score = 0;
         SetScore();
+        vidas = 3;
+        SetVidas();
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+        //healthBar.SetMaxHealth(vida);
     }
-
+    void GameOver()
+    {
+        GameOverPanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
+    public void Pause()
+    {
+        isPaused = !isPaused;
+        PausePanel.SetActive(isPaused);
+        if (isPaused)
+            Time.timeScale = 0f;
+        else
+            Time.timeScale = 1f;
+        
+    }
     void ReceiveDamage(float damage)
     {
         animator.SetTrigger("Flinch");
+        vidas--;
+        SetVidas();
         vida -= damage;
+        //healthBar.SetHealth(vida);
+        if (vidas <= 0)
+            GameOver();
     }
     public void TryAttack()
     {
@@ -98,6 +133,7 @@ public class Player : MonoBehaviour
     void Update()
     {
 #if UNITY_ANDROID
+        TimeText.text = string.Format("Time alive: {0}",Time.time.ToString("0.00")); 
         foreach(Touch touch in Input.touches)
         {
             if (touch.phase == TouchPhase.Began)
@@ -107,8 +143,11 @@ public class Player : MonoBehaviour
         }
 #endif
 #if UNITY_64
+        TimeText.text = string.Format("Time alive: {0}",Time.time.ToString("0.00")); 
         if (Input.GetKeyDown(KeyCode.Space))
             animator.SetTrigger("Block");
+        if (Input.GetKeyDown(KeyCode.P))
+            Pause();
         /*if (Input.GetKeyDown(KeyCode.Q)) 
         {
             if (currentEnemyReference.vulnerable) 

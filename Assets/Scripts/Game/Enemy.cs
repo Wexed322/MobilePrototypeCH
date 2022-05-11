@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour
         referencePlayer = FindObjectOfType<Player>();
         referencePlayer.currentEnemyReference = this;
         StartCoroutine("AttackTask");
+        
         //this.GetComponent<Animator>().speed = 0.5f;
     }
     void Update()
