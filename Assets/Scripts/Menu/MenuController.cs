@@ -7,6 +7,10 @@ public class MenuController : MonoBehaviour
 {
     public GameObject PanelReference;
     public List<GameObject> Menus;
+    bool isPaused;
+
+    public GameObject PausePanel;
+    public GameObject PauseGameOver;
     void Start()
     {
         if (GameManager.instance != null) 
@@ -23,7 +27,8 @@ public class MenuController : MonoBehaviour
     }
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.P))
+            Pause();
     }
 
     public void CharacterSelection()
@@ -62,4 +67,18 @@ public class MenuController : MonoBehaviour
         GameObject menuCarga =  Instantiate(prefab, PanelReference.transform);
         return menuCarga;
     }
+
+    public void Pause()
+    {
+        isPaused = !isPaused;
+        PausePanel.SetActive(isPaused);
+        if (isPaused)
+            Time.timeScale = 0f;
+        else
+            Time.timeScale = 1f;
+
+    }
+
+
+
 }

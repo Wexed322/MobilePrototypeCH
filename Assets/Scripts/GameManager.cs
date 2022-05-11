@@ -10,9 +10,17 @@ public class StartGameEvent
 
     /*public static System.Action<string, string, string> eventoMuerteString;//eventoConparametros*/
 }
+
+public class GameOverEvent
+{
+    public static System.Action eventosParaGameOver;
+
+    /*public static System.Action<string, string, string> eventoMuerteString;//eventoConparametros*/
+}
 public enum Escenas { MainMenu, SecondaryMenu, Game }
 public class GameManager : MonoBehaviour
 {
+
     //SINGLETON
     public static GameManager instance;
 
@@ -57,5 +65,10 @@ public class GameManager : MonoBehaviour
             //sliderCarga.value = op.progress;
             yield return null;
         }
+    }
+
+    public void GameOver()
+    {
+        Time.timeScale = 0f;
     }
 }
