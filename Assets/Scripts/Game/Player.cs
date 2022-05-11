@@ -11,7 +11,6 @@ public class Player : MonoBehaviour
     //public testScriptable testScriptable_2;
     //public HealthBar healthBar;
     public GameObject GameOverPanel;
-    public GameObject PausePanel;
     [SerializeField] Text ScoreText;
     [SerializeField] Text TimeText;
     [SerializeField] Text VidasText;
@@ -36,10 +35,7 @@ public class Player : MonoBehaviour
     }
     //ARMA
     //STATS DE VELOCIDAD DE ATAQUE??, MAS VIDA, POWER UP
-    private void Awake()
-    {
-        
-    }
+    
     void Start()
     {
         isPaused = false;
@@ -57,16 +53,6 @@ public class Player : MonoBehaviour
         GameOverPanel.SetActive(true);
         Time.timeScale = 0f;
     }
-    public void Pause()
-    {
-        isPaused = !isPaused;
-        PausePanel.SetActive(isPaused);
-        if (isPaused)
-            Time.timeScale = 0f;
-        else
-            Time.timeScale = 1f;
-        
-    }
     void ReceiveDamage(float damage)
     {
         animator.SetTrigger("Flinch");
@@ -74,8 +60,13 @@ public class Player : MonoBehaviour
         SetVidas();
         vida -= damage;
         //healthBar.SetHealth(vida);
-        if (vidas <= 0)
-            GameOver();
+        if (vidas <= 0) 
+        {
+            GameManager.instance.GameOver();
+            GameOverPanel.SetActive(true);
+        }
+           
+
     }
     public void TryAttack()
     {
