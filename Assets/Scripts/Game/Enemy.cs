@@ -42,6 +42,10 @@ public class Enemy : MonoBehaviour
     public void Attack()
     {
         animator.SetTrigger("Attack");
+        
+    }
+    public void AttackEvent()
+    {
         referencePlayer.TryAttack();
     }
     public void Flinch()

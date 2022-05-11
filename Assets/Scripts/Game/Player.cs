@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
@@ -8,6 +9,7 @@ public class Player : MonoBehaviour
 {
     //public testScriptable testScriptable_;
     //public testScriptable testScriptable_2;
+    [SerializeField] Text Score;
     Animator animator;
     SpriteRenderer sr;
     public Enemy currentEnemyReference;
@@ -15,6 +17,12 @@ public class Player : MonoBehaviour
     public float vida;
     public float currentCoins;
     public float currentDiamonds;
+    public int score;
+
+    void SetScore()
+    {
+        Score.text = string.Format("Score: {0}",this.score);
+    }
     //ARMA
     //STATS DE VELOCIDAD DE ATAQUE??, MAS VIDA, POWER UP
     private void Awake()
@@ -23,6 +31,8 @@ public class Player : MonoBehaviour
     }
     void Start()
     {
+        score = 0;
+        SetScore();
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
     }
@@ -81,10 +91,22 @@ public class Player : MonoBehaviour
     void Counter()
     {
         animator.SetTrigger("Attack");
+        score++;
+        SetScore();
     }
 
     void Update()
     {
+#if UNITY_ANDROID
+        foreach(Touch touch in Input.touches)
+        {
+            if (touch.phase == TouchPhase.Began)
+            {
+                animator.SetTrigger("Block");
+            }
+        }
+#endif
+#if UNITY_64
         if (Input.GetKeyDown(KeyCode.Space))
             animator.SetTrigger("Block");
         /*if (Input.GetKeyDown(KeyCode.Q)) 
@@ -114,5 +136,6 @@ public class Player : MonoBehaviour
             testScriptable_.vida += SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }*/
+#endif
     }
 }
