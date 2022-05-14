@@ -37,6 +37,7 @@ public class MenuController : MonoBehaviour
     }
     public void StartGame() 
     {
+        Time.timeScale = 1f;
         StartGameEvent.eventosParaIniciarJuego?.Invoke();
         GameManager.instance.loadScene(Escenas.Game);
     }
@@ -70,15 +71,12 @@ public class MenuController : MonoBehaviour
 
     public void Pause()
     {
-        isPaused = !isPaused;
-        PausePanel.SetActive(isPaused);
-        if (isPaused)
-            Time.timeScale = 0f;
-        else
-            Time.timeScale = 1f;
-
+        PausePanel.SetActive(GameManager.instance.isPaused);
     }
 
-
+    public void GameOver()
+    {
+        PauseGameOver.SetActive(GameManager.instance.gameOver);
+    }
 
 }

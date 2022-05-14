@@ -10,16 +10,17 @@ public class Player : MonoBehaviour
     //public testScriptable testScriptable_;
     //public testScriptable testScriptable_2;
     //public HealthBar healthBar;
-    public GameObject GameOverPanel;
     [SerializeField] Text ScoreText;
     [SerializeField] Text TimeText;
     [SerializeField] Text VidasText;
     Animator animator;
     SpriteRenderer sr;
+    PlayerConfig playerSettings;
     public Enemy currentEnemyReference;
     public int vidas;
     public float damage;
     public float vida;
+    public float resistencia;
     public float currentCoins;
     public float currentDiamonds;
     public int score;
@@ -35,24 +36,27 @@ public class Player : MonoBehaviour
     }
     //ARMA
     //STATS DE VELOCIDAD DE ATAQUE??, MAS VIDA, POWER UP
-    
+
     void Start()
     {
-        isPaused = false;
-        GameOverPanel.SetActive(false);
+        playerSettings = GameManager.instance.playerConfig;
+        animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
+        if (playerSettings != null)
+        {
+            vida = playerSettings.vida;
+            damage = playerSettings.damage;
+            resistencia = playerSettings.resistencia;
+            sr.color = playerSettings.color;
+        }
         score = 0;
         SetScore();
         vidas = 3;
         SetVidas();
-        animator = GetComponent<Animator>();
-        sr = GetComponent<SpriteRenderer>();
+
         //healthBar.SetMaxHealth(vida);
     }
-    void GameOver()
-    {
-        GameOverPanel.SetActive(true);
-        Time.timeScale = 0f;
-    }
+
     void ReceiveDamage(float damage)
     {
         animator.SetTrigger("Flinch");
@@ -63,10 +67,14 @@ public class Player : MonoBehaviour
         if (vidas <= 0) 
         {
             GameManager.instance.GameOver();
-            GameOverPanel.SetActive(true);
         }
            
 
+    }
+
+    public void DealDamage()
+    {
+        currentEnemyReference.Flinch();
     }
     public void TryAttack()
     {
@@ -76,7 +84,7 @@ public class Player : MonoBehaviour
         }
         else if(this.tag == "Parry")
         {
-            currentEnemyReference.Flinch();
+
             Counter();
         }
         else
@@ -116,9 +124,13 @@ public class Player : MonoBehaviour
 
     void Counter()
     {
-        animator.SetTrigger("Attack");
+        animator.SetTrigger("Counter");
         score++;
         SetScore();
+    }
+    public void PauseButton()
+    {
+        GameManager.instance.Pause();
     }
 
     void Update()
@@ -138,7 +150,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
             animator.SetTrigger("Block");
         if (Input.GetKeyDown(KeyCode.P))
-            Pause();
+            GameManager.instance.Pause();
         /*if (Input.GetKeyDown(KeyCode.Q)) 
         {
             if (currentEnemyReference.vulnerable) 

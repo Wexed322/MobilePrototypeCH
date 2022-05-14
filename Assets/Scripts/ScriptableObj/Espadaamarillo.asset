@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nombre: Pepe
   descripcion: Le gusta la naturalez y fumarse un porrito
+  color: {r: 1, g: 0.9798179, b: 0, a: 1}
   vida: 10
   damage: 10
   resistencia: 10

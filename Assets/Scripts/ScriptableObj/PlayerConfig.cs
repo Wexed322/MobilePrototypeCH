@@ -8,6 +8,7 @@ public class PlayerConfig : ScriptableObject
 {
     public string nombre;
     public string descripcion;
+    public Color color;
     public float vida;
     public float damage;
     public float resistencia;

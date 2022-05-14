@@ -29,9 +29,12 @@ public class GameManager : MonoBehaviour
     public AudioSource audioSource;
     public GameObject MenuCargaPrefab;
     public MenuController menuController;
+    public bool isPaused;
+    public bool gameOver;
  
     private void Awake()
     {
+        isPaused = false;
         if (instance == null)
         {
             instance = this;
@@ -55,20 +58,35 @@ public class GameManager : MonoBehaviour
     IEnumerator LoadScene(Escenas scene)
     {
         //yield return new WaitForSeconds(1);
+
         AsyncOperation op = SceneManager.LoadSceneAsync(scene.ToString());
         GameObject sliderCargaObject = menuController.InicializarMenuDeCarga(MenuCargaPrefab);
         Slider sliderCarga = sliderCargaObject.transform.GetChild(0).gameObject.GetComponent<Slider>();
 
-
+        
         while (!op.isDone)
         {
             //sliderCarga.value = op.progress;
+            yield return new WaitForSeconds(1);
             yield return null;
         }
     }
 
     public void GameOver()
     {
+        gameOver = true;
+        menuController.GameOver();
+
         Time.timeScale = 0f;
+    }
+
+    public void Pause()
+    {
+        isPaused = !isPaused;
+        menuController.Pause();
+        if (isPaused)
+            Time.timeScale = 0;
+        if (!isPaused)
+            Time.timeScale = 1;
     }
 }

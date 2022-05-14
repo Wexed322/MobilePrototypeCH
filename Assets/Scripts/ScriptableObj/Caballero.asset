@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcf33d68dea88f847882ec4ee0dab280, type: 3}
   m_Name: Caballero
   m_EditorClassIdentifier: 
-  id: 0
   nombre: Caballero
   descripcion: Agil - barbon - gei
+  color: {r: 1, g: 1, b: 1, a: 1}
   vida: 100
   damage: 500
   resistencia: 500
