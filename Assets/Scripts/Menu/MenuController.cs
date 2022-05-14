@@ -9,6 +9,7 @@ public class MenuController : MonoBehaviour
     public List<GameObject> Menus;
     bool isPaused;
 
+    public TransitionScene transitionScene_;
     public GameObject PausePanel;
     public GameObject PauseGameOver;
     void Start()
@@ -31,15 +32,21 @@ public class MenuController : MonoBehaviour
             Pause();
     }
 
-    public void CharacterSelection()
+    public void goCharacterSelection()
     {
         GameManager.instance.loadScene(Escenas.SecondaryMenu);
     }
-    public void StartGame() 
+    public void goStartGame() 
     {
         Time.timeScale = 1f;
         StartGameEvent.eventosParaIniciarJuego?.Invoke();
         GameManager.instance.loadScene(Escenas.Game);
+    }
+
+    public void goMenu()
+    {
+        Time.timeScale = 1f;
+        GameManager.instance.loadScene(Escenas.MainMenu);
     }
 
     public void setVolumePref(Slider input) 
@@ -49,7 +56,7 @@ public class MenuController : MonoBehaviour
 
     public void setBrilloPref(Slider input)
     {
-        PlayerPrefs.SetFloat("BrilloGlobal", Mathf.Clamp(input.value,0f,0.8f));
+        PlayerPrefs.SetFloat("BrilloGlobal", Mathf.Clamp(1-input.value,0f,0.8f));
     }
 
     public void setBrillo(Image input)

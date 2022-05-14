@@ -24,10 +24,12 @@ public class GameManager : MonoBehaviour
     //SINGLETON
     public static GameManager instance;
 
+
+    
     public PlayerConfig playerConfig;
     public TouchManager touchManager;
     public AudioSource audioSource;
-    public GameObject MenuCargaPrefab;
+    public Animator FadePrefab;
     public MenuController menuController;
     public bool isPaused;
     public bool gameOver;
@@ -57,19 +59,18 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator LoadScene(Escenas scene)
     {
-        //yield return new WaitForSeconds(1);
+        menuController.transitionScene_.FadeIn();
+        yield return new WaitForSeconds(1);
 
         AsyncOperation op = SceneManager.LoadSceneAsync(scene.ToString());
-        GameObject sliderCargaObject = menuController.InicializarMenuDeCarga(MenuCargaPrefab);
-        Slider sliderCarga = sliderCargaObject.transform.GetChild(0).gameObject.GetComponent<Slider>();
 
         
         while (!op.isDone)
         {
-            //sliderCarga.value = op.progress;
-            yield return new WaitForSeconds(1);
+
             yield return null;
         }
+
     }
 
     public void GameOver()
@@ -89,4 +90,5 @@ public class GameManager : MonoBehaviour
         if (!isPaused)
             Time.timeScale = 1;
     }
+   
 }
