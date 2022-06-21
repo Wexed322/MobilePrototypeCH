@@ -6,4 +6,9 @@ using BehaviorDesigner.Runtime.Tasks;
 public class AINodeAction : Action
 {
     protected AIEnemyAction AIEnemyAction;
+
+    public override void OnStart()
+    {
+        AIEnemyAction = GetComponent<AIEnemyAction>();
+    }
 }

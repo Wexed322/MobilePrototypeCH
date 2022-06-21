@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIEnemyVehicle : AIEnemy
+public class AIEnemyVehicle : AICharacterController
 {
-    Transform goal;
-    // Start is called before the first frame update
+    public Transform goal;
     void Start()
     {
-        goal = FindObjectOfType<EnemyPos>().transform;
+        this.loadComponents();
     }
+
     public void GoToPosition()
     {
-        Vector2.MoveTowards(this.transform.position, goal.position, 0);
+        //this.enemy.animator.Play("LightBandit_Run");
+        //this.transform.position =  Vector2.MoveTowards(this.transform.position, goal.position, 0);
+        Debug.Log("ananana");
     }
 }

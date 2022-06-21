@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum EnemyType {Fuerza, Magia, Agilidad}
+
+
+[RequireComponent(typeof(Animator))]
 public class Enemy : MonoBehaviour
 {
+    //public HealthBar healthBar;
     public Player referencePlayer;
+
+
+
+
     public float secondsBetweenAttacks;
-    Animator animator;
+    public Animator animator;
     SpriteRenderer sr;
     public bool vulnerable;
     public float damage;
@@ -23,22 +31,12 @@ public class Enemy : MonoBehaviour
     }
     void Start()
     {
+
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         referencePlayer = FindObjectOfType<Player>();
         referencePlayer.currentEnemyReference = this;
         StartCoroutine("AttackTask");
-        
-        //this.GetComponent<Animator>().speed = 0.5f;
-    }
-    void Update()
-    {
-        /*
-        if (Input.GetKeyDown(KeyCode.A)) 
-        {
-            this.GetComponent<Animator>().speed++;
-        }*/
-        
     }
     public void Attack()
     {

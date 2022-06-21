@@ -40,7 +40,8 @@ public class MenuController : MonoBehaviour
     {
         Time.timeScale = 1f;
         StartGameEvent.eventosParaIniciarJuego?.Invoke();
-        GameManager.instance.loadScene(Escenas.Game);
+        //GameManager.instance.loadScene(Escenas.Game);//SE CAMBIO PARA HACER PRUEBAS
+        GameManager.instance.loadScene(Escenas.Game2_AI);//SE CAMBIO PARA HACER PRUEBAS
     }
 
     public void goMenu()

@@ -17,7 +17,7 @@ public class GameOverEvent
 
     /*public static System.Action<string, string, string> eventoMuerteString;//eventoConparametros*/
 }
-public enum Escenas { MainMenu, SecondaryMenu, Game }
+public enum Escenas { MainMenu, SecondaryMenu, Game, Game2_AI }
 public class GameManager : MonoBehaviour
 {
 

@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/SecondaryMenu.unity
     guid: c0a10b2622518ab47951df841ecf9de3
   - enabled: 1
+    path: Assets/Scenes/Game2_AI.unity
+    guid: 197574327fc487e4fbabeb96776704ff
+  - enabled: 0
     path: Assets/Scenes/Game.unity
     guid: 42e933b319343ee44bb5b895a64238c0
   - enabled: 0
