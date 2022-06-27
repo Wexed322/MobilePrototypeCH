@@ -34,9 +34,14 @@ public class Enemy : MonoBehaviour
 
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
-        referencePlayer = FindObjectOfType<Player>();
-        referencePlayer.currentEnemyReference = this;
-        StartCoroutine("AttackTask");
+        //referencePlayer = FindObjectOfType<Player>();
+        //referencePlayer.currentEnemyReference = this;
+        //StartCoroutine("AttackTask");
+    }
+
+    private void Update()
+    {
+
     }
     public void Attack()
     {

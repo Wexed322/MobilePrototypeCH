@@ -10,4 +10,5 @@ public class AINodeVehicle : Action
     {
         AIEnemyVehicle = GetComponent<AIEnemyVehicle>();
     }
+
 }

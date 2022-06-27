@@ -12,11 +12,18 @@ public class AINodeRange : Action
     {
         aiSensor = GetComponent<AISensor>();
     }
-    /*public override TaskStatus OnUpdate()
+
+
+    public override TaskStatus OnUpdate()
     {
-        if (aiSensor.getDistance() < minRangeToAttack) 
+        if (aiSensor.getDistance() < minRangeToAttack)//dentro del rango, pegues idk
+        {
+            return TaskStatus.Failure;
+        }
+        else //fuera del rango pases al siguiente nodo, caminando
         {
             return TaskStatus.Success;
         }
-    }*/
+    }
 }
+

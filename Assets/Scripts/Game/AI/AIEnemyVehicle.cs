@@ -13,7 +13,6 @@ public class AIEnemyVehicle : AICharacterController
     public void GoToPosition()
     {
         //this.enemy.animator.Play("LightBandit_Run");
-        //this.transform.position =  Vector2.MoveTowards(this.transform.position, goal.position, 0);
-        Debug.Log("ananana");
+        this.transform.position = Vector3.MoveTowards(this.transform.position, goal.position,0.02f);
     }
 }

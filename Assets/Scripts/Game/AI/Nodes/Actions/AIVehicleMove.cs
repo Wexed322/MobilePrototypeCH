@@ -11,6 +11,7 @@ public class AIVehicleMove : AINodeVehicle
     }
     public override TaskStatus OnUpdate()
     {
+        this.AIEnemyVehicle.enemy.animator.Play("Run");
         AIEnemyVehicle.GoToPosition();
         return TaskStatus.Success;
     }

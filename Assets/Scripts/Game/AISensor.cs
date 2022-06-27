@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class AISensor : MonoBehaviour
 {
-    private Transform player;
+    public Transform player;
 
     public void loadComponents(Enemy enemy) 
     {
-        player = enemy.referencePlayer.transform;
+        if (player == null) 
+        {
+            player = enemy.referencePlayer.transform;
+        }
+        
     }
     public float getDistance() 
     {
