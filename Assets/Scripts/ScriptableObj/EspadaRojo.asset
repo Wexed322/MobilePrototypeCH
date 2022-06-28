@@ -16,5 +16,5 @@ MonoBehaviour:
   descripcion: El mas normal de todos, chill
   color: {r: 1, g: 0, b: 0, a: 1}
   vida: 9999
-  damage: 444
+  damage: 15
   resistencia: 0

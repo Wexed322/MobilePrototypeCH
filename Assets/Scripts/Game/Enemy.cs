@@ -34,8 +34,8 @@ public class Enemy : MonoBehaviour
 
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
-        //referencePlayer = FindObjectOfType<Player>();
-        //referencePlayer.currentEnemyReference = this;
+        referencePlayer = FindObjectOfType<Player>();
+        referencePlayer.currentEnemyReference = this;
         //StartCoroutine("AttackTask");
     }
 
@@ -54,7 +54,8 @@ public class Enemy : MonoBehaviour
     }
     public void Flinch()
     {
-        animator.SetTrigger("Flinch");
+        Debug.Log("Flinch");
+        animator.Play("Hurt");
         ReceiveDamage();
     }
     void ReceiveDamage()

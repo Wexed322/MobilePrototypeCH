@@ -11,4 +11,5 @@ public class AINodeAction : Action
     {
         AIEnemyAction = GetComponent<AIEnemyAction>();
     }
+
 }

@@ -16,5 +16,5 @@ MonoBehaviour:
   descripcion: Agil - barbon - gei
   color: {r: 1, g: 1, b: 1, a: 1}
   vida: 100
-  damage: 500
+  damage: 20
   resistencia: 500
