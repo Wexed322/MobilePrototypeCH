@@ -14,6 +14,6 @@ public class AIEnemyVehicle : AICharacterController
     {
         //this.enemy.animator.Play("LightBandit_Run");
         //if(Vector2.Distance(this.transform.position,goal.position)>distanceToStop)
-            this.transform.position = Vector3.MoveTowards(this.transform.position, goal.position,0.02f);
+        this.transform.position = Vector3.MoveTowards(this.transform.position, goal.position,0.02f);
     }
 }

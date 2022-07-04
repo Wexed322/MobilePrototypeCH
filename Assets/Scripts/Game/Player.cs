@@ -135,6 +135,13 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space)) 
+        {
+            Debug.Log("ANACHEI");
+            animator.SetTrigger("Block");
+        }
+            
+
 #if UNITY_ANDROID
         TimeText.text = string.Format("Time alive: {0}", Time.timeSinceLevelLoad.ToString("0.00")); 
         foreach(Touch touch in Input.touches)

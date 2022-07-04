@@ -9,11 +9,12 @@ public enum EnemyType {Fuerza, Magia, Agilidad}
 public class Enemy : MonoBehaviour
 {
     //public HealthBar healthBar;
+    public EnemySpawn enemySpawnReference;
     public Player referencePlayer;
 
 
 
-
+    
     public float secondsBetweenAttacks;
     public Animator animator;
     SpriteRenderer sr;
@@ -31,7 +32,6 @@ public class Enemy : MonoBehaviour
     }
     void Start()
     {
-
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         referencePlayer = FindObjectOfType<Player>();
@@ -41,7 +41,10 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.E)) 
+        {
+            ReceiveDamage();
+        }
     }
     public void Attack()
     {
@@ -61,8 +64,12 @@ public class Enemy : MonoBehaviour
     void ReceiveDamage()
     {
         health = health - referencePlayer.damage;
-        if (health <= 0)
+        if (health <= 0) 
+        {
             Death();
+            enemySpawnReference.nextEnemy(this);
+        }
+
     }
     public void Death()
     {
